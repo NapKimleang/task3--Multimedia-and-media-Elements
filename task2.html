@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favorite Hobby - Custom Media Controls</title>
+    <style>
+        .controls {
+            margin-top: 20px;
+        }
+        .controls button {
+            padding: 10px;
+            margin-right: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .controls button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>My Favorite Hobby</h1>
+    <p>I enjoy reading novels, and here’s a video about the importance of reading and an audio clip that I enjoy listening to while reading.</p>
+
+    <h2>Watch this video about reading:</h2>
+    <!-- YouTube Video Container -->
+    <div id="player"></div>
+
+    <!-- Custom Video Controls -->
+    <div class="controls">
+        <button onclick="playVideo()">Play</button>
+        <button onclick="pauseVideo()">Pause</button>
+    </div>
+
+    <h2>Listen to this audio clip:</h2>
+    <!-- Embedded Audio Clip -->
+    <audio id="audio" src="meow.wav"></audio>
+
+    <!-- Custom Audio Controls -->
+    <div class="controls">
+        <button onclick="playAudio()">Play Audio</button>
+        <button onclick="pauseAudio()">Pause Audio</button>
+        <button onclick="adjustVolume(0.5)">Set Volume to 50%</button>
+        <button onclick="adjustVolume(1)">Set Volume to 100%</button>
+    </div>
+
+    <script>
+        // 1. Load the IFrame Player API code asynchronously.
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // 2. Create the YouTube player.
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '315',
+                width: '560',
+                videoId: 'L6GvNdxwe0o', // Replace with your video ID
+                events: {
+                    'onReady': onPlayerReady,
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Player is ready
+        }
+
+        // Custom functions to control the video
+        function playVideo() {
+            player.playVideo();
+        }
+
+        function pauseVideo() {
+            player.pauseVideo();
+        }
+
+        // Audio controls
+        function playAudio() {
+            let audio = document.getElementById('audio');
+            audio.play();
+        }
+
+        function pauseAudio() {
+            let audio = document.getElementById('audio');
+            audio.pause();
+        }
+
+        function adjustVolume(level) {
+            let audio = document.getElementById('audio');
+            audio.volume = level;
+        }
+    </script>
+
+</body>
+</html>
